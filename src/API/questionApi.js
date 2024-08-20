@@ -100,3 +100,24 @@ export async function validateAnswer(questionId, answerId, token) {
     throw error;
   }
 }
+
+export async function exportQuestionsToExcel(token) {
+  try {
+    const response = await fetch(`${apiUrl}/api/questions/export`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Error en la exportación");
+    }
+
+    return response;
+  } catch (error) {
+    console.error("Error al iniciar la exportación:", error);
+    throw error;
+  }
+}
